@@ -1,4 +1,5 @@
 import itertools
+import sys
 from collections import Counter
 
 s = 0.5
@@ -34,6 +35,12 @@ def frequentItems(items, tdb, n, s):
             ret.append([k, v])
     return(dict(ret))
 
+print("All frequent one-itemsets:")
+print(frequentItems(items, tdb1, 1, s))
+
+print("All frequent two-itemsets:")
+print(frequentItems(items, tdb1, 2, s))
+
 print("All frequent three-itemsets:")
 print(frequentItems(items, tdb1, 3, s))
 
@@ -53,7 +60,7 @@ for i in range(len(k2)):
         if k1[j] == i1:
             confidence = v2[i]/v1[j]
     if v2[i] >= s * len(tdb1) and confidence >= c:
-        print(i1, " -> ", i2, ": (", v2[i], ", ", confidence, ")") 
+        print("{0:<6} -> {1:<6}: ({2},{3})".format(i1, i2,str(v2[i]),confidence))
     
     i1 = k2[i][1]
     i2 = k2[i][0]
@@ -61,7 +68,7 @@ for i in range(len(k2)):
         if k1[j] == i1:
             confidence = v2[i]/v1[j]
     if v2[i] >= s * len(tdb1) and confidence >= c:
-        print(i1, " -> ", i2, ": (", v2[i], ", ", confidence, ")") 
-
+        #print(i1, " -> ", i2, ": (", v2[i], ", ", confidence, ")") 
+        print("{0:<6} -> {1:<6}: ({2},{3})".format(i1, i2,str(v2[i]),confidence))
 
 
