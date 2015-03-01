@@ -1,4 +1,8 @@
 import itertools
+import pandas as pd
+
+def pairs(n):
+    return(n*n + n*(n-1)/2)
 
 #Q2: 51;51
 sdb   = {1: ["a", "bc", "de", "c", "f"],
@@ -12,8 +16,8 @@ items = []
 for sequence in sdb.values():
     for transaction in sequence:
         for item in transaction:
-            items.append(item)
-items = set(items)
+            if item not in items:
+                items.append(item)
 
 # Calculate support for each item
 support = []
@@ -26,11 +30,15 @@ for i in items:
                     s = s + 1
     support.append(s)
 
-support
-# since the support is always greater than min_support = 3, 
-# the number of candidates with and without pruning is the same
-6*6+6*5/2
+itemsup = dict(zip(items, support))
+min_sup = 3
+length1 = [k for k,v in itemsup.items() if v >=3]
+
+n_pruning = len(length1)
+n_nopruning = len(items)
+
+print("Question 2")
+print("Without pruning: " + str(pairs(n_nopruning)))
+print("With pruning:    " + str(pairs(n_pruning)))
 
 # Q3:
-sdb   = {1: ["a", 
-        }
